@@ -4,12 +4,23 @@ use yew::{function_component, html, Html};
 
 #[function_component(ParameterList)]
 pub fn parameter_list() -> Html {
-    let parameter = Parameter {
-        name: String::from("N"),
-    };
+    let parameter_items = vec![
+        Parameter {
+            name: String::from("N"),
+        },
+        Parameter {
+            name: String::from("M"),
+        },
+        Parameter {
+            name: String::from("K"),
+        },
+    ];
+
     html! {
     <ul class="list-group">
-        <ParameterItem name={parameter.name} selected={false} />
+        {parameter_items.iter().map(|parameter| html!{
+            <ParameterItem name={parameter.name.clone()} selected={false} />
+        }).collect::<Html>()}
     </ul>
     }
 }
