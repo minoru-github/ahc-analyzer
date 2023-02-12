@@ -1,14 +1,20 @@
+use components::header::*;
+use components::parameter::parameter_form::ParameterForm;
+use components::parameter::parameter_list::ParameterList;
 use yew::prelude::*;
+
+mod components;
 
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <div>
-            <h1>{"Hello World!"}</h1>
-            <button>{"Click me"}</button>
-            <br/>
-            <input type="text"/>
-        </div>
+        <>
+            <Header />
+            <main class="container-fluid mt-2">
+                <ParameterForm />
+                <ParameterList />
+            </main>
+        </>
     }
 }
 
