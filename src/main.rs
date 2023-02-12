@@ -1,6 +1,7 @@
-use yew::prelude::*;
 use components::header::*;
+use components::parameter::parameter_form::ParameterForm;
 use components::parameter::parameter_list::ParameterList;
+use yew::prelude::*;
 
 mod components;
 
@@ -10,6 +11,7 @@ fn app() -> Html {
         <>
             <Header />
             <main class="container-fluid mt-2">
+                <ParameterForm />
                 <ParameterList />
             </main>
         </>
