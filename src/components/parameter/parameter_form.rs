@@ -2,8 +2,13 @@ use yew::{
     function_component, html, use_state, Callback, Html, InputEvent, MouseEvent, Properties,
 };
 
+#[derive(Properties, PartialEq)]
+pub struct ParameterFormProps {
+    pub on_add: Callback<String>,
+}
+
 #[function_component(ParameterForm)]
-pub fn parameter_form() -> Html {
+pub fn parameter_form(props: &ParameterFormProps) -> Html {
     let name = use_state(|| "".to_string());
 
     let oninput = {
@@ -26,10 +31,12 @@ pub fn parameter_form() -> Html {
     };
 
     let onclick = {
+        let on_add = props.on_add.clone();
         let name = name.clone();
         Callback::from(move |e: MouseEvent| {
             e.prevent_default(); // Web APIのEvent.preventDefault()と同じ
             name.set("".to_string());
+            on_add.emit((*name).clone());
         })
     };
 

@@ -7,11 +7,17 @@ mod components;
 
 #[function_component(App)]
 fn app() -> Html {
+    let on_add = {
+        Callback::from(move |name: String| {
+            log::info!("on_add: {:?}", name);
+        })
+    };
+
     html! {
         <>
             <Header />
             <main class="container-fluid mt-2">
-                <ParameterForm />
+                <ParameterForm {on_add} />
                 <ParameterList />
             </main>
         </>
