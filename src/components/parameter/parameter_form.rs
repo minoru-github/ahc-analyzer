@@ -8,7 +8,7 @@ pub fn parameter_form() -> Html {
                 <label for="input-parameter" class="form-label">{"入力パラメーター"}</label>
                 <input type="text" class="form-control" id="input-parameter" />
             </div>
-            <button tyep="submit" class="btn btn-primary">{"追加"}</button>
+            <button type="submit" class="btn btn-primary">{"追加"}</button>
         </form>
     }
 }
