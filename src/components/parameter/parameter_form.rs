@@ -1,14 +1,45 @@
-use yew::{function_component, html, Html};
+use yew::{
+    function_component, html, use_state, Callback, Html, InputEvent, MouseEvent, Properties,
+};
 
 #[function_component(ParameterForm)]
 pub fn parameter_form() -> Html {
+    let name = use_state(|| "".to_string());
+
+    let oninput = {
+        let name = name.clone();
+        // moveでnameの所有権をクロージャに強制的に移し、
+        // name.set()で値の更新ができるようにする。
+        Callback::from(move |e: InputEvent| {
+            let value = e.data();
+
+            match value {
+                Some(value) => {
+                    name.set((*name).clone() + &value);
+                }
+                None => {
+                    // input内を全消しした時とかがココ
+                    name.set("".to_string());
+                }
+            }
+        })
+    };
+
+    let onclick = {
+        let name = name.clone();
+        Callback::from(move |e: MouseEvent| {
+            e.prevent_default(); // Web APIのEvent.preventDefault()と同じ
+            name.set("".to_string());
+        })
+    };
+
     html! {
         <form class="mb-5">
             <div>
                 <label for="input-parameter" class="form-label">{"入力パラメーター"}</label>
-                <input type="text" class="form-control" id="input-parameter" />
+                <input type="text" value={(*name).clone()} {oninput} class="form-control" id="input-parameter" />
             </div>
-            <button type="submit" class="btn btn-primary">{"追加"}</button>
+            <button type="submit" {onclick} class="btn btn-primary">{"追加"}</button>
         </form>
     }
 }
