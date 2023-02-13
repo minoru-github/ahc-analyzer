@@ -1,15 +1,21 @@
 use components::header::*;
 use components::parameter::parameter_form::ParameterForm;
 use components::parameter::parameter_list::ParameterList;
+use components::parameter::types::Parameter;
 use yew::prelude::*;
 
 mod components;
 
 #[function_component(App)]
 fn app() -> Html {
+    let parameter_items = use_state(|| Vec::<Parameter>::new());
+
     let on_add = {
+        let parameter_items = parameter_items.clone();
         Callback::from(move |name: String| {
-            log::info!("on_add: {:?}", name);
+            let mut current_parameter_items = (*parameter_items).clone();
+            current_parameter_items.push(Parameter { name });
+            parameter_items.set(current_parameter_items);
         })
     };
 
@@ -18,7 +24,7 @@ fn app() -> Html {
             <Header />
             <main class="container-fluid mt-2">
                 <ParameterForm {on_add} />
-                <ParameterList />
+                <ParameterList parameter_items = {(*parameter_items).clone()} />
             </main>
         </>
     }
