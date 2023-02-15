@@ -8,7 +8,11 @@ mod components;
 
 #[function_component(App)]
 fn app() -> Html {
-    let parameter_items = use_state(|| Vec::<Parameter>::new());
+    let parameter_items = use_state(|| {
+        Vec::<Parameter>::from([Parameter {
+            name: "N".to_string(),
+        }])
+    });
 
     let on_add = {
         let parameter_items = parameter_items.clone();
