@@ -2,6 +2,7 @@ use components::header::*;
 use components::parameter::parameter_form::ParameterForm;
 use components::parameter::parameter_list::ParameterList;
 use components::parameter::types::Parameter;
+use components::data::data_reader::DataReader;
 use yew::prelude::*;
 
 mod components;
@@ -29,6 +30,7 @@ fn app() -> Html {
             <main class="container-fluid mt-2">
                 <ParameterForm {on_add} />
                 <ParameterList parameter_items = {(*parameter_items).clone()} />
+                <DataReader />
             </main>
         </>
     }
