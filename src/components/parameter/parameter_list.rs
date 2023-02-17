@@ -11,7 +11,6 @@ pub struct ParameterListProps {
 pub fn parameter_list(props: &ParameterListProps) -> Html {
     html! {
     <ul class="list-group">
-        <label class="form-label">{"list"}</label>
         {props.parameter_items.iter().map(|parameter| html!{
             <ParameterItem name={parameter.name.clone()} selected={false} />
         }).collect::<Html>()}

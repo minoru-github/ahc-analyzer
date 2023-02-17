@@ -41,12 +41,9 @@ pub fn parameter_form(props: &ParameterFormProps) -> Html {
     };
 
     html! {
-        <form class="mb-5">
-            <div>
-                <label for="input-parameter" class="form-label">{"入力パラメーター"}</label>
-                <input type="text" value={(*name).clone()} {oninput} class="form-control" id="input-parameter" />
-            </div>
-            <button type="submit" {onclick} class="btn btn-primary">{"追加"}</button>
+        <form class="input-group mb-3">
+                <button class="btn btn-outline-secondary" type="button" {onclick} >{"add"}</button>
+                <input type="text" value={(*name).clone()} {oninput} class="form-control" placeholder="input parameter" />
         </form>
     }
 }

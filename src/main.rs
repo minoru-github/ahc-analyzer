@@ -2,13 +2,18 @@ use components::header::*;
 use components::parameter::parameter_form::ParameterForm;
 use components::parameter::parameter_list::ParameterList;
 use components::parameter::types::Parameter;
+use components::data::data_reader::DataReader;
 use yew::prelude::*;
 
 mod components;
 
 #[function_component(App)]
 fn app() -> Html {
-    let parameter_items = use_state(|| Vec::<Parameter>::new());
+    let parameter_items = use_state(|| {
+        Vec::<Parameter>::from([Parameter {
+            name: "N".to_string(),
+        }])
+    });
 
     let on_add = {
         let parameter_items = parameter_items.clone();
@@ -25,6 +30,7 @@ fn app() -> Html {
             <main class="container-fluid mt-2">
                 <ParameterForm {on_add} />
                 <ParameterList parameter_items = {(*parameter_items).clone()} />
+                <DataReader />
             </main>
         </>
     }
